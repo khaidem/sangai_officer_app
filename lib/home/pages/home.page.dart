@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                       const Text(
                         "Today's",
                         style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.w900),
+                            fontSize: 30, fontWeight: FontWeight.w900),
                       ),
                       getSize(0, 5),
                       const GradientText(
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                           Color(0xfff45b69),
                           Color(0xffffbc11),
                         ]),
-                        fontSize: 25,
+                        fontSize: 30,
                       ),
                     ],
                   ),
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       const GradientIcon(
                         Icons.confirmation_num,
-                        20,
+                        25,
                         LinearGradient(
                           colors: <Color>[
                             Color(0xfff45b69),
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       const GradientIcon(
                         Icons.person,
-                        20,
+                        25,
                         LinearGradient(
                           colors: <Color>[
                             Color(0xfff45b69),

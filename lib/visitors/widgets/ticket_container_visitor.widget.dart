@@ -25,8 +25,6 @@ class TicketContainerVisitorWidget extends StatelessWidget {
           Radius.circular(15),
         ),
       ),
-      width: 150,
-      // height: 100,
       child: Padding(
         padding: const EdgeInsets.all(2),
         child: Container(
@@ -43,18 +41,18 @@ class TicketContainerVisitorWidget extends StatelessWidget {
               Text(
                 venueName,
                 style: GoogleFonts.raleway(
-                    fontSize: 12, fontWeight: FontWeight.bold),
+                    fontSize: 12, fontWeight: FontWeight.w800),
               ),
               Text(
                 number,
                 style: GoogleFonts.raleway(
-                    fontSize: 25, fontWeight: FontWeight.w700),
+                    fontSize: 25, fontWeight: FontWeight.w800),
               ),
               // getSize(0, 10),
               Text(
                 ticketSold,
                 style: GoogleFonts.raleway(
-                    fontSize: 12, fontWeight: FontWeight.bold),
+                    fontSize: 12, fontWeight: FontWeight.w700),
               ),
             ],
           ),
