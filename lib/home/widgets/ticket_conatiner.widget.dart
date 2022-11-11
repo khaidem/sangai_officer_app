@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../core/constant.dart';
-
 class TicketContainerWidget extends StatelessWidget {
   const TicketContainerWidget({
     Key? key,
@@ -48,12 +46,12 @@ class TicketContainerWidget extends StatelessWidget {
               Text(
                 venueName,
                 style: GoogleFonts.raleway(
-                    fontSize: 15, fontWeight: FontWeight.bold),
+                    fontSize: 15, fontWeight: FontWeight.w800),
               ),
               Text(
                 number,
                 style: GoogleFonts.raleway(
-                    fontSize: 30, fontWeight: FontWeight.w700),
+                    fontSize: 30, fontWeight: FontWeight.w900),
               ),
             ],
           ),
