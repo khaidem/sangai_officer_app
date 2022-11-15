@@ -1,0 +1,101 @@
+{
+  "project_info": {
+    "project_number": "773848806886",
+    "firebase_url": "https://sangai-ticket-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "sangai-ticket",
+    "storage_bucket": "sangai-ticket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773848806886:android:8d7e8a031a147b51009227",
+        "android_client_info": {
+          "package_name": "com.example.sangai_agent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773848806886-49pcjvfo5ctc742ekhf8n537iso06f23.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sangai_agent",
+            "certificate_hash": "9b1eca8a421f237eb4f711ed0d608d2420c2ea28"
+          }
+        },
+        {
+          "client_id": "773848806886-8p2nvp89qf137kq881q6t9regltdlufq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sangai_agent",
+            "certificate_hash": "aed173ac51a0ded964c81cbf17b85a6465f503a5"
+          }
+        },
+        {
+          "client_id": "773848806886-e4nmo1pvd26ur94stpj8l3di28fht4ji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sangai_agent",
+            "certificate_hash": "d525f90d769a16bcb10a9b1e4f64ddab342b3367"
+          }
+        },
+        {
+          "client_id": "773848806886-jsv2qctm0tjql4kodc0belvegpqlpn86.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sangai_agent",
+            "certificate_hash": "0cdbec65c6814dfb7acf7411881bf571fa65c35d"
+          }
+        },
+        {
+          "client_id": "773848806886-919jiue97fagn2lltpi3phrnmfcaj0i2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1PB0dQSOKaE4InEQCxZktdf7qRScmh9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773848806886-919jiue97fagn2lltpi3phrnmfcaj0i2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773848806886:android:fdf8013a4f4b3af5009227",
+        "android_client_info": {
+          "package_name": "com.example.sangai_officer_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773848806886-919jiue97fagn2lltpi3phrnmfcaj0i2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1PB0dQSOKaE4InEQCxZktdf7qRScmh9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773848806886-919jiue97fagn2lltpi3phrnmfcaj0i2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

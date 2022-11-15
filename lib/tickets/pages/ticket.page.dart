@@ -1,43 +1,55 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:sangai_officer_app/core/constant.dart';
-import 'package:sangai_officer_app/core/text_style.dart';
 import 'package:sangai_officer_app/tickets/widgets/widgets.dart';
 
+import '../../core/core.dart';
 import '../../core/widget/text_gradient.widget.dart';
 
-class TicketPage extends StatelessWidget {
+class TicketPage extends StatefulWidget {
   const TicketPage({Key? key}) : super(key: key);
   static const routeName = '/TicketPage';
+
+  @override
+  State<TicketPage> createState() => _TicketPageState();
+}
+
+class _TicketPageState extends State<TicketPage> {
+  final ref = FirebaseDatabase.instance.ref();
+  List dateTime = ['2022-11-01', '2022-11-02'];
+  List ticketSold = [];
+  @override
+  void initState() {
+    super.initState();
+    ref.onValue.listen((dataValue) {
+      final data = Map<String, dynamic>.from(
+        dataValue.snapshot.value as Map,
+      );
+      data.forEach((key, value) {
+        ticketSold.add(value);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Positioned(
-              left: 0,
-              top: 30,
-              child: Image.asset(
-                KImage.sangailogo,
-                height: 120,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(35),
+        child: StreamBuilder(
+          stream: ref.onValue,
+          builder: (ctx, snap) {
+            return Padding(
+              padding: const EdgeInsets.all(20),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  getSize(100, 0),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Today's",
+                        "Tickets",
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.w900),
                       ),
-                      getSize(0, 5),
                       const GradientText(
                         'Sold',
                         gradient: LinearGradient(colors: [
@@ -46,10 +58,15 @@ class TicketPage extends StatelessWidget {
                         ]),
                         fontSize: 30,
                       ),
+                      getSize(0, 100),
+                      Image.asset(
+                        KImage.sangailogo,
+                        height: 70,
+                      ),
                     ],
                   ),
                   getSize(20, 0),
-                  const RowSoldWidget(dayName: 'Day 1', date: '23st Nov 2022'),
+                  const RowSoldWidget(dayName: 'Day 1', date: '21st Nov 2022'),
                   getSize(20, 0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +96,7 @@ class TicketPage extends StatelessWidget {
                     ],
                   ),
                   getSize(20, 0),
-                  const RowSoldWidget(dayName: 'Day 2', date: '23st Nov 2022'),
+                  const RowSoldWidget(dayName: 'Day 2', date: '22st Nov 2022'),
                   getSize(20, 0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,10 +154,39 @@ class TicketPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  getSize(20, 0),
+                  const RowSoldWidget(dayName: 'Day 3', date: '24st Nov 2022'),
+                  getSize(20, 0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const TicketContainerSoldWidget(
+                        venueName: 'Hapta Kangjeibung',
+                        number: '1,500',
+                        ticketSold: 'TicketSold',
+                      ),
+                      getSize(0, 10),
+                      const TicketContainerSoldWidget(
+                        venueName: 'Moirng Khunou',
+                        number: '1,500',
+                        ticketSold: 'TicketSold',
+                      ),
+                    ],
+                  ),
+                  getSize(10, 0),
+                  Row(
+                    children: const [
+                      TicketContainerSoldWidget(
+                        venueName: 'Marjing',
+                        number: '1,500',
+                        ticketSold: 'TicketSold',
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

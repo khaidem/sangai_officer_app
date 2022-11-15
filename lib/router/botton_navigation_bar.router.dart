@@ -47,15 +47,15 @@ class _BottomNavigationBarRouterState extends State<BottomNavigationBarRouter> {
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
-            label: 'Home',
+            label: 'Today Report',
             icon: Icon(FontAwesomeIcons.house),
           ),
           BottomNavigationBarItem(
-            label: 'Ticket',
+            label: 'Today Sold',
             icon: Icon(FontAwesomeIcons.ticket),
           ),
           BottomNavigationBarItem(
-            label: 'Visitor',
+            label: 'Visitor Count',
             icon: Icon(FontAwesomeIcons.users),
           ),
         ],
