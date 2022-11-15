@@ -58,14 +58,13 @@ class _TicketPageState extends State<TicketPage> {
                         ]),
                         fontSize: 30,
                       ),
-                      getSize(0, 100),
+                      const Spacer(),
                       Image.asset(
                         KImage.sangailogo,
                         height: 70,
                       ),
                     ],
                   ),
-                  getSize(20, 0),
                   const RowSoldWidget(dayName: 'Day 1', date: '21st Nov 2022'),
                   getSize(20, 0),
                   Row(
