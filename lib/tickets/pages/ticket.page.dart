@@ -35,7 +35,9 @@ class _TicketPageState extends State<TicketPage> {
       }).toList();
       k.remove("total");
       k.sort();
-
+      if (!mounted) {
+        return;
+      }
       setState(() {
         data = res;
         keys = k;
