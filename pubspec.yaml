@@ -41,6 +41,9 @@ dependencies:
   flutter_native_splash: ^2.2.14
   firebase_core: ^2.2.0
   firebase_database: ^10.0.5
+  pinput: ^2.2.16
+  firebase_auth: ^4.1.2
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:
