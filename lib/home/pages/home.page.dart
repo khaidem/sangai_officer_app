@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sangai_officer_app/core/widget/text_gradient.widget.dart';
@@ -15,35 +18,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DateTime date = DateTime.now();
+  final d = DateTime.now().toString();
 
-  // final ref = FirebaseDatabase.instance.ref('2022-11-15');
-  String ticket1 = '23';
-  String ticket2 = '23';
-  String ticket3 = '34';
-  String visitor1 = '34';
-  String visitor2 = '300';
-  String visitor3 = '300';
+  String ticket1 = '';
+  String ticket2 = '';
+  String ticket3 = '';
+  String visitor1 = '';
+  String visitor2 = '';
+  String visitor3 = '';
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   ref.onValue.listen((dataValue) {
-  //     final data = Map<String, dynamic>.from(
-  //       dataValue.snapshot.value as Map,
-  //     );
-  //     log(data.toString());
-  //     log(data['sold_count_venue_1'].toString());
-  //     setState(() {
-  //       ticket1 = data['sold_e_1'].toString();
-  //       ticket2 = data['sold_e_2'].toString();
-  //       ticket3 = data['sold_e_3'].toString();
-  //       visitor1 = data['checked_1'].toString();
-  //       visitor2 = data['checked_2'].toString();
-  //       visitor3 = data['checked_3'].toString();
-  //     });
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    var timeSplit = d.split(' ');
+    final ref =
+        FirebaseDatabase.instance.ref().child('tickets').child(timeSplit[0]);
+
+    ref.onValue.listen((dataValue) {
+      final data = Map<String, dynamic>.from(
+        dataValue.snapshot.value as Map,
+      );
+      log(data.toString());
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        ticket1 = data['sold_e_1'].toString();
+        ticket2 = data['sold_e_2'].toString();
+        ticket3 = data['sold_e_3'].toString();
+        visitor1 = data['checked_1'].toString();
+        visitor2 = data['checked_2'].toString();
+        visitor3 = data['checked_3'].toString();
+      });
+      log(ticket1.toString());
+    });
+  }
 
   final Shader linearGradient = const LinearGradient(
     colors: [
@@ -115,18 +124,18 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: TicketContainerSoldWidget(
                       venueName: 'Hapta Kangjeibung',
-                      number: '200',
+                      number: ticket1,
                       ticketSold: 'TicketSold',
                     ),
                   ),
                   getSize(0, 10),
-                  const Expanded(
+                  Expanded(
                     child: TicketContainerSoldWidget(
                       venueName: 'Moirng Khunou',
-                      number: '200',
+                      number: ticket2,
                       ticketSold: 'TicketSold',
                     ),
                   ),
@@ -136,10 +145,10 @@ class _HomePageState extends State<HomePage> {
               FittedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
+                  children: [
                     TicketContainerSoldWidget(
                       venueName: 'Marjing',
-                      number: '400',
+                      number: ticket3,
                       ticketSold: 'TicketSold',
                     ),
                   ],
@@ -175,18 +184,18 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: TicketContainerSoldWidget(
                       venueName: 'Hapta Kangjeibung',
-                      number: '600',
+                      number: visitor1,
                       ticketSold: 'TicketSold',
                     ),
                   ),
                   getSize(0, 10),
-                  const Expanded(
+                  Expanded(
                     child: TicketContainerSoldWidget(
                       venueName: 'Moirng Khunou',
-                      number: '400',
+                      number: visitor2,
                       ticketSold: 'TicketSold',
                     ),
                   ),
@@ -196,10 +205,10 @@ class _HomePageState extends State<HomePage> {
               FittedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
+                  children: [
                     TicketContainerSoldWidget(
                       venueName: 'Marjing',
-                      number: '900',
+                      number: visitor3,
                       ticketSold: 'TicketSold',
                     ),
                   ],

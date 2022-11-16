@@ -1,9 +1,7 @@
+import 'dart:developer';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:sangai_officer_app/tickets/widgets/widgets.dart';
-
-import '../../core/core.dart';
-import '../../core/widget/text_gradient.widget.dart';
 
 class TicketPage extends StatefulWidget {
   const TicketPage({Key? key}) : super(key: key);
@@ -14,9 +12,16 @@ class TicketPage extends StatefulWidget {
 }
 
 class _TicketPageState extends State<TicketPage> {
-  final ref = FirebaseDatabase.instance.ref();
-  List dateTime = ['2022-11-01', '2022-11-02'];
+  final ref = FirebaseDatabase.instance.ref().child('tickets');
+  // List dateTime = ['2022-11-01', '2022-11-02'];
   List ticketSold = [];
+  List dateKey = [];
+  String ticket1 = '';
+  String ticket2 = '';
+  String ticket3 = '';
+  String visitor1 = '';
+  String visitor2 = '';
+  String visitor3 = '';
   @override
   void initState() {
     super.initState();
@@ -24,169 +29,41 @@ class _TicketPageState extends State<TicketPage> {
       final data = Map<String, dynamic>.from(
         dataValue.snapshot.value as Map,
       );
-      data.forEach((key, value) {
-        ticketSold.add(value);
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        ticket1 = data['sold_e_1'].toString();
+        ticket2 = data['sold_e_2'].toString();
+        ticket3 = data['sold_e_3'].toString();
+        visitor1 = data['checked_1'].toString();
+        visitor2 = data['checked_2'].toString();
+        visitor3 = data['checked_3'].toString();
       });
+      // log(ticketSold.toString());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: StreamBuilder(
-          stream: ref.onValue,
-          builder: (ctx, snap) {
-            return Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Tickets",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.w900),
-                      ),
-                      const GradientText(
-                        'Sold',
-                        gradient: LinearGradient(colors: [
-                          Color(0xfff45b69),
-                          Color(0xffffbc11),
-                        ]),
-                        fontSize: 30,
-                      ),
-                      const Spacer(),
-                      Image.asset(
-                        KImage.sangailogo,
-                        height: 70,
-                      ),
-                    ],
-                  ),
-                  const RowSoldWidget(dayName: 'Day 1', date: '21st Nov 2022'),
-                  getSize(20, 0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const TicketContainerSoldWidget(
-                        venueName: 'Hapta Kangjeibung',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                      getSize(0, 10),
-                      const TicketContainerSoldWidget(
-                        venueName: 'Moirng Khunou',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                    ],
-                  ),
-                  getSize(10, 0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      TicketContainerSoldWidget(
-                        venueName: 'Marjing',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                    ],
-                  ),
-                  getSize(20, 0),
-                  const RowSoldWidget(dayName: 'Day 2', date: '22st Nov 2022'),
-                  getSize(20, 0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const TicketContainerSoldWidget(
-                        venueName: 'Hapta Kangjeibung',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                      getSize(0, 10),
-                      const TicketContainerSoldWidget(
-                        venueName: 'Moirng Khunou',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                    ],
-                  ),
-                  getSize(10, 0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      TicketContainerSoldWidget(
-                        venueName: 'Marjing',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                    ],
-                  ),
-                  getSize(20, 0),
-                  const RowSoldWidget(dayName: 'Day 3', date: '23st Nov 2022'),
-                  getSize(20, 0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const TicketContainerSoldWidget(
-                        venueName: 'Hapta Kangjeibung',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                      getSize(0, 10),
-                      const TicketContainerSoldWidget(
-                        venueName: 'Moirng Khunou',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                    ],
-                  ),
-                  getSize(10, 0),
-                  Row(
-                    children: const [
-                      TicketContainerSoldWidget(
-                        venueName: 'Marjing',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                    ],
-                  ),
-                  getSize(20, 0),
-                  const RowSoldWidget(dayName: 'Day 3', date: '24st Nov 2022'),
-                  getSize(20, 0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const TicketContainerSoldWidget(
-                        venueName: 'Hapta Kangjeibung',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                      getSize(0, 10),
-                      const TicketContainerSoldWidget(
-                        venueName: 'Moirng Khunou',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                    ],
-                  ),
-                  getSize(10, 0),
-                  Row(
-                    children: const [
-                      TicketContainerSoldWidget(
-                        venueName: 'Marjing',
-                        number: '1,500',
-                        ticketSold: 'TicketSold',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+      body: StreamBuilder(
+        stream: ref.onValue,
+        builder: (context, snap) {
+          if (snap.hasData) {
+            log(snap.data!.snapshot.value.toString());
+            
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: ,
+              itemBuilder: (BuildContext context, int index) {
+                return Text();
+              },
             );
-          },
-        ),
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
       ),
     );
   }
