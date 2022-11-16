@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:sangai_officer_app/Onbaording/logic/auth_service.provider.dart';
 import 'package:sangai_officer_app/core/widget/text_gradient.widget.dart';
 
 import '../../core/core.dart';
@@ -92,6 +94,43 @@ class _HomePageState extends State<HomePage> {
                     KImage.sangailogo,
                     height: 70,
                   ),
+                  IconButton(
+                      onPressed: () {
+                        showDialog<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text(''),
+                              content: const Text('Do You want to logOut?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    textStyle:
+                                        Theme.of(context).textTheme.labelLarge,
+                                  ),
+                                  child: const Text('Yes'),
+                                  onPressed: () {
+                                    context
+                                        .read<AuthServiceProvider>()
+                                        .signOut(context);
+                                  },
+                                ),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    textStyle:
+                                        Theme.of(context).textTheme.labelLarge,
+                                  ),
+                                  child: const Text('No'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      icon: const Icon(Icons.logout))
                 ],
               ),
               getSize(10, 0),
@@ -125,6 +164,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
+                    flex: 1,
                     child: TicketContainerSoldWidget(
                       venueName: 'Hapta Kangjeibung',
                       number: ticket1,
@@ -133,8 +173,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   getSize(0, 10),
                   Expanded(
+                    flex: 1,
                     child: TicketContainerSoldWidget(
-                      venueName: 'Moirng Khunou',
+                      venueName: 'Moirang Khunou',
                       number: ticket2,
                       ticketSold: 'TicketSold',
                     ),
@@ -142,17 +183,20 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               getSize(10, 0),
-              FittedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    TicketContainerSoldWidget(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: TicketContainerSoldWidget(
                       venueName: 'Marjing',
                       number: ticket3,
                       ticketSold: 'TicketSold',
                     ),
-                  ],
-                ),
+                  ),
+                  getSize(0, 10),
+                  Expanded(flex: 1, child: Container())
+                ],
               ),
               getSize(20, 0),
               Row(
@@ -194,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                   getSize(0, 10),
                   Expanded(
                     child: TicketContainerSoldWidget(
-                      venueName: 'Moirng Khunou',
+                      venueName: 'Moirang Khunou',
                       number: visitor2,
                       ticketSold: 'TicketSold',
                     ),
@@ -202,17 +246,19 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               getSize(10, 0),
-              FittedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    TicketContainerSoldWidget(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: TicketContainerSoldWidget(
                       venueName: 'Marjing',
                       number: visitor3,
                       ticketSold: 'TicketSold',
                     ),
-                  ],
-                ),
+                  ),
+                  Expanded(flex: 1, child: Container())
+                ],
               ),
             ],
           ),

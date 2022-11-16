@@ -51,9 +51,6 @@ class _VisitorPageState extends State<VisitorPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(
-              height: 15,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -72,7 +69,7 @@ class _VisitorPageState extends State<VisitorPage> {
                 const Spacer(),
                 Image.asset(
                   KImage.sangailogo,
-                  height: 70,
+                  height: 50,
                 ),
               ],
             ),
@@ -96,6 +93,7 @@ class _VisitorPageState extends State<VisitorPage> {
                         Row(
                           children: [
                             Expanded(
+                              flex: 1,
                               child: TicketContainerSoldWidget(
                                 number: t['sold_e_1'].toString(),
                                 ticketSold: "Ticket Sold",
@@ -106,6 +104,7 @@ class _VisitorPageState extends State<VisitorPage> {
                               width: 10,
                             ),
                             Expanded(
+                              flex: 1,
                               child: TicketContainerSoldWidget(
                                 number: t['sold_e_2'].toString(),
                                 ticketSold: "Ticket Sold",
@@ -115,10 +114,21 @@ class _VisitorPageState extends State<VisitorPage> {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        TicketContainerSoldWidget(
-                          number: t['sold_e_3'].toString(),
-                          ticketSold: "Ticket Sold",
-                          venueName: 'Marjing',
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: TicketContainerSoldWidget(
+                                number: t['sold_e_3'].toString(),
+                                ticketSold: "Ticket Sold",
+                                venueName: 'Marjing',
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(flex: 1, child: Container())
+                          ],
                         ),
                       ],
                     ),

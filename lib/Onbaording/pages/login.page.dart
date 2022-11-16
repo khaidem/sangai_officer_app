@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
+import 'package:sangai_officer_app/Onbaording/pages/otp_login.page.dart';
 
 import '../../core/constant.dart';
+import '../logic/auth_service.provider.dart';
+import '../logic/otp_login.provider.dart';
 
 class OtpLoginPage extends StatefulWidget {
   const OtpLoginPage({Key? key}) : super(key: key);
@@ -50,19 +55,22 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
           child: Stack(
             children: [
               Positioned(
-                left: 0,
-                top: 50,
+                left: 25,
+                top: 10,
                 child: Image.asset(
                   KImage.sangailogo,
-                  height: 100,
+                  height: 200,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(35),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  // mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    const SizedBox(
+                      height: 200,
+                    ),
                     const Text(
                       'AGENT',
                       style: TextStyle(
@@ -72,11 +80,10 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                     ),
                     const Text(
                       'Login',
-                      // style: getExtraStyle(
-                      //   color: const Color(0xfff45b69),
-                      // ),
                     ),
-                    // getSizeBox(50.0),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       children: [
                         Column(
@@ -84,7 +91,6 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                           children: const [
                             Text(
                               'We will send you OTP on this ',
-                              // style: getSemiBoldStyle(color: Colors.black),
                             ),
                             Text(
                               'mobile number',
@@ -94,7 +100,9 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                         )
                       ],
                     ),
-                    // getSizeBox(20),
+                    const SizedBox(
+                      height: 20,
+                    ),
 
                     Container(
                       decoration: BoxDecoration(
@@ -163,21 +171,42 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                         ),
                       ),
                     ),
-                    // getSizeBox(20),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
+                        EasyLoading.show(status: 'Please wait');
                         if (mounted) {
                           setState(() {
                             _isLoading = true;
                           });
                         }
                         if (phoneController.text.isEmpty) {
-                          // showErrorHUD(title: "Number can't be Empty");
+                          EasyLoading.showError('Empty Number');
                         } else {
-                          // EasyLoading.show(status: 'Please wait');
+                          var d =
+                              await LoginAPI().checkPhone(phoneController.text);
+                          if (d) {
+                            EasyLoading.dismiss();
 
-                          // context.read<AuthService>().getVerificationPhone(
-                          //     context, countryController.text + phone);
+                            context
+                                .read<AuthServiceProvider>()
+                                .getVerificationPhone(
+                                    context,
+                                    countryController.text +
+                                        phoneController.text)
+                                .whenComplete(() => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (ctx) => VerificationOtpPage(
+                                            phoneNUmber:
+                                                "+91${phoneController.text}"),
+                                      ),
+                                    ));
+                            EasyLoading.showToast('Success');
+                          } else {
+                            EasyLoading.showToast('Mobile Number not Register');
+                          }
                         }
 
                         if (mounted) {
