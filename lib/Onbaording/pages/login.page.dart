@@ -59,7 +59,7 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
             children: [
               Positioned(
                 left: 25,
-                top: 10,
+                top: 20,
                 child: Image.asset(
                   KImage.sangailogo,
                   height: 200,
@@ -253,7 +253,6 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                         ),
                       ),
                     ),
-
                     // Row(
                     //   children: [
                     //     Text(

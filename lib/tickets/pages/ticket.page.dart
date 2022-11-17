@@ -1,10 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:sangai_officer_app/home/example.dart';
 
 import '../../core/constant.dart';
+import '../../core/text_style.dart';
 import '../../core/widget/text_gradient.widget.dart';
 import '../widgets/row_sold.widget.dart';
-import '../widgets/ticket_container_sold.widget.dart';
 
 class TicketPage extends StatefulWidget {
   const TicketPage({Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class _TicketPageState extends State<TicketPage> {
                   const Spacer(),
                   Image.asset(
                     KImage.sangailogo,
-                    height: 70,
+                    height: 100,
                   ),
                 ],
               ),
@@ -92,46 +93,21 @@ class _TicketPageState extends State<TicketPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: TicketContainerSoldWidget(
-                                  number: t['sold_e_1'].toString(),
-                                  ticketSold: "Ticket Sold",
-                                  venueName: 'Hapta',
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: TicketContainerSoldWidget(
-                                  number: t['sold_e_2'].toString(),
-                                  ticketSold: "Ticket Sold",
-                                  venueName: 'Moirang',
-                                ),
-                              ),
-                            ],
-                          ),
+                          TicketContainerWidget(
+                              venueName: "Hapta kangjeibung",
+                              number: t['sold_e_1'].toString(),
+                              image: KImage.ticketsLowOpac),
+                          getSize(10, 0),
+                          TicketContainerWidget(
+                              venueName: "Moirng",
+                              number: t['sold_e_2'].toString(),
+                              image: KImage.ticketsLowOpac),
+                          getSize(10, 0),
+                          TicketContainerWidget(
+                              venueName: "Marjing",
+                              number: t['sold_e_3'].toString(),
+                              image: KImage.ticketsLowOpac),
                           const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: TicketContainerSoldWidget(
-                                  number: t['sold_e_3'].toString(),
-                                  ticketSold: "Ticket Sold",
-                                  venueName: 'Marjing',
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(flex: 1, child: Container())
-                            ],
-                          ),
                         ],
                       ),
                     ],

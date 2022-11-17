@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sangai_officer_app/Onbaording/pages/otp_login.page.dart';
 import 'package:sangai_officer_app/router/router.dart';
 
@@ -28,6 +29,7 @@ class AuthServiceProvider with ChangeNotifier {
             // showErrorHUD(
             //   title: "INVALID PHONE NUMBER $e",
             // );
+            EasyLoading.showError('Invalid Phone$e');
             // logger.e(e.toString());
             // if (e.code == 'invalid-phone-number$e') {
             //   showErrorHUD(

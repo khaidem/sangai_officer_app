@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:sangai_officer_app/Onbaording/logic/auth_service.provider.dart';
-import 'package:sangai_officer_app/Onbaording/pages/login.page.dart';
 
 import '../home/pages/pages.dart';
 import '../router/router.dart';
@@ -25,15 +23,16 @@ class MyApp extends StatelessWidget {
         builder: EasyLoading.init(),
         title: 'sangai Officer',
         debugShowCheckedModeBanner: false,
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (ctx, snaShot) {
-            if (snaShot.hasData) {
-              return const BottomNavigationBarRouter();
-            }
-            return const OtpLoginPage();
-          },
-        ),
+        home: const BottomNavigationBarRouter(),
+        // home: StreamBuilder(
+        //   stream: FirebaseAuth.instance.authStateChanges(),
+        //   builder: (ctx, snaShot) {
+        //     if (snaShot.hasData) {
+        //       return const BottomNavigationBarRouter();
+        //     }
+        //     return const OtpLoginPage();
+        //   },
+        // ),
         routes: {
           HomePage.routeName: (context) => const HomePage(),
           TicketPage.routeName: (context) => const TicketPage(),

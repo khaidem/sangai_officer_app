@@ -84,6 +84,10 @@ flutter_icons:
 flutter_native_splash:
   color: "#FFFFFF"
   image: assets/images/sangai-LOGO.png
+  
+
+  web: true
+
 
   android: true
   ios: true

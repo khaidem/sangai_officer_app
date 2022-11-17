@@ -51,7 +51,7 @@ class _BottomNavigationBarRouterState extends State<BottomNavigationBarRouter> {
             icon: Icon(FontAwesomeIcons.house),
           ),
           BottomNavigationBarItem(
-            label: 'Today Sold',
+            label: 'Ticket Sold',
             icon: Icon(FontAwesomeIcons.ticket),
           ),
           BottomNavigationBarItem(

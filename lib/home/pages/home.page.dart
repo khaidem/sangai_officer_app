@@ -6,10 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sangai_officer_app/Onbaording/logic/auth_service.provider.dart';
 import 'package:sangai_officer_app/core/widget/text_gradient.widget.dart';
+import 'package:sangai_officer_app/home/example.dart';
 
 import '../../core/core.dart';
 import '../../core/widget/icon_gradient.widget.dart';
-import '../../tickets/example.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -160,45 +160,21 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               getSize(10, 0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: TicketContainerSoldWidget(
-                      venueName: 'Hapta Kangjeibung',
-                      number: ticket1,
-                      ticketSold: 'TicketSold',
-                    ),
-                  ),
-                  getSize(0, 10),
-                  Expanded(
-                    flex: 1,
-                    child: TicketContainerSoldWidget(
-                      venueName: 'Moirang Khunou',
-                      number: ticket2,
-                      ticketSold: 'TicketSold',
-                    ),
-                  ),
-                ],
-              ),
+              TicketContainerWidget(
+                  venueName: 'Hapta Kangjeibung',
+                  number: ticket1,
+                  image: KImage.ticketsLowOpac),
               getSize(10, 0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: TicketContainerSoldWidget(
-                      venueName: 'Marjing',
-                      number: ticket3,
-                      ticketSold: 'TicketSold',
-                    ),
-                  ),
-                  getSize(0, 10),
-                  Expanded(flex: 1, child: Container())
-                ],
-              ),
-              getSize(20, 0),
+              TicketContainerWidget(
+                  venueName: 'Moirang Khunou',
+                  number: ticket2,
+                  image: KImage.ticketsLowOpac),
+              getSize(10, 0),
+              TicketContainerWidget(
+                  venueName: 'Marjing',
+                  number: ticket2,
+                  image: KImage.ticketsLowOpac),
+              getSize(10, 0),
               Row(
                 children: [
                   const GradientIcon(
@@ -225,41 +201,121 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               getSize(10, 0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TicketContainerSoldWidget(
-                      venueName: 'Hapta Kangjeibung',
-                      number: visitor1,
-                      ticketSold: 'TicketSold',
-                    ),
-                  ),
-                  getSize(0, 10),
-                  Expanded(
-                    child: TicketContainerSoldWidget(
-                      venueName: 'Moirang Khunou',
-                      number: visitor2,
-                      ticketSold: 'TicketSold',
-                    ),
-                  ),
-                ],
-              ),
+              TicketContainerWidget(
+                  venueName: 'Hapta Kangjeibung',
+                  number: visitor1,
+                  image: KImage.visitorLowOpac),
               getSize(10, 0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: TicketContainerSoldWidget(
-                      venueName: 'Marjing',
-                      number: visitor3,
-                      ticketSold: 'TicketSold',
-                    ),
-                  ),
-                  Expanded(flex: 1, child: Container())
-                ],
-              ),
+              TicketContainerWidget(
+                  venueName: 'Moirang Khunou',
+                  number: visitor2,
+                  image: KImage.visitorLowOpac),
+              getSize(10, 0),
+              TicketContainerWidget(
+                  venueName: 'Marjing',
+                  number: visitor3,
+                  image: KImage.visitorLowOpac),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Expanded(
+              //       flex: 1,
+              //       child: TicketContainerSoldWidget(
+              //         venueName: 'Hapta Kangjeibung',
+              //         number: ticket1,
+              //         ticketSold: 'TicketSold',
+              //       ),
+              //     ),
+              //     getSize(0, 10),
+              //     Expanded(
+              //       flex: 1,
+              //       child: TicketContainerSoldWidget(
+              //         venueName: 'Moirang Khunou',
+              //         number: ticket2,
+              //         ticketSold: 'TicketSold',
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // getSize(10, 0),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   children: [
+              //     Expanded(
+              //       flex: 1,
+              //       child: TicketContainerSoldWidget(
+              //         venueName: 'Marjing',
+              //         number: ticket3,
+              //         ticketSold: 'TicketSold',
+              //       ),
+              //     ),
+              //     getSize(0, 10),
+              //     Expanded(flex: 1, child: Container())
+              //   ],
+              // ),
+              // getSize(20, 0),
+              // Row(
+              //   children: [
+              //     const GradientIcon(
+              //       Icons.person,
+              //       25,
+              //       LinearGradient(
+              //         colors: <Color>[
+              //           Color(0xfff45b69),
+              //           Color(0xffffbc11),
+              //         ],
+              //         begin: Alignment.topLeft,
+              //         end: Alignment.bottomRight,
+              //       ),
+              //     ),
+              //     getSize(0, 10),
+              //     Text(
+              //       'Visitors',
+              //       style: GoogleFonts.raleway(
+              //         color: Colors.black,
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.w800,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // getSize(10, 0),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Expanded(
+              //       child: TicketContainerSoldWidget(
+              //         venueName: 'Hapta Kangjeibung',
+              //         number: visitor1,
+              //         ticketSold: 'TicketSold',
+              //       ),
+              //     ),
+              //     getSize(0, 10),
+              //     Expanded(
+              //       child: TicketContainerSoldWidget(
+              //         venueName: 'Moirang Khunou',
+              //         number: visitor2,
+              //         ticketSold: 'TicketSold',
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // getSize(10, 0),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   children: [
+              //     Expanded(
+              //       flex: 1,
+              //       child: TicketContainerSoldWidget(
+              //         venueName: 'Marjing',
+              //         number: visitor3,
+              //         ticketSold: 'TicketSold',
+              //       ),
+              //     ),
+              //     Expanded(flex: 1, child: Container())
+              //   ],
+              // ),
             ],
           ),
         ),

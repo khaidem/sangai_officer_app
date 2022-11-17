@@ -46,12 +46,14 @@ class TicketContainerWidget extends StatelessWidget {
               Text(
                 venueName,
                 style: GoogleFonts.raleway(
-                    fontSize: 15, fontWeight: FontWeight.w800),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.grey),
               ),
               Text(
                 number,
                 style: GoogleFonts.raleway(
-                    fontSize: 30, fontWeight: FontWeight.w900),
+                    fontSize: 35, fontWeight: FontWeight.w900),
               ),
             ],
           ),
