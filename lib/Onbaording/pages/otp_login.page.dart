@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:sangai_officer_app/Onbaording/logic/auth_service.provider.dart';
@@ -100,18 +101,19 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                   const SizedBox(
                     height: 200,
                   ),
-                  const Text(
+                  Text(
                     'AGENT',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: GoogleFonts.raleway(
+                        fontSize: 15, fontWeight: FontWeight.w800),
                   ),
-                  const Text(
+
+                  Text(
                     'Login',
-                    // style: getExtraStyle(
-                    //   color: const Color(0xfff45b69),
-                    // ),
+                    style: GoogleFonts.raleway(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w900,
+                      color: const Color(0xfff45b69),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -130,7 +132,10 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                             maxLines: 1,
                             text: TextSpan(
                               text: 'Enter',
-                              style: const TextStyle(color: Colors.black),
+                              style: GoogleFonts.raleway(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black),
                               children: [
                                 const TextSpan(
                                     text: ' OTP',
@@ -152,30 +157,30 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                     height: 20,
                   ),
                   Pinput(
-                    androidSmsAutofillMethod:
-                        AndroidSmsAutofillMethod.smsRetrieverApi,
+                    // androidSmsAutofillMethod:
+                    //     AndroidSmsAutofillMethod.smsRetrieverApi,
                     length: 6,
                     showCursor: true,
                     defaultPinTheme: defaultPinTheme,
                     focusedPinTheme: focusedPinTheme,
                     submittedPinTheme: submittedPinTheme,
-                    onCompleted: (verify) {
-                      setState(() {
-                        code = verify;
+                    // onCompleted: (verify) {
+                    //   setState(() {
+                    //     code = verify;
 
-                        // context.read<AuthService>().otpVerification(code).then(
-                        //   (value) {
-                        //     if (value) {
-                        //       return Navigator.of(context)
-                        //           .pushNamedAndRemoveUntil(
-                        //         BottomNavigationBarRouter.routeName,
-                        //         (route) => false,
-                        //       );
-                        //     }
-                        //   },
-                        // );
-                      });
-                    },
+                    //     // context.read<AuthService>().otpVerification(code).then(
+                    //     //   (value) {
+                    //     //     if (value) {
+                    //     //       return Navigator.of(context)
+                    //     //           .pushNamedAndRemoveUntil(
+                    //     //         BottomNavigationBarRouter.routeName,
+                    //     //         (route) => false,
+                    //     //       );
+                    //     //     }
+                    //     //   },
+                    //     // );
+                    //   });
+                    // },
                   ),
                   const SizedBox(
                     height: 20,

@@ -95,7 +95,7 @@ class _VisitorPageState extends State<VisitorPage> {
                             Expanded(
                               flex: 1,
                               child: TicketContainerSoldWidget(
-                                number: t['sold_e_1'].toString(),
+                                number: t['checked_1'].toString(),
                                 ticketSold: "Ticket Sold",
                                 venueName: 'Hapta',
                               ),
@@ -106,7 +106,7 @@ class _VisitorPageState extends State<VisitorPage> {
                             Expanded(
                               flex: 1,
                               child: TicketContainerSoldWidget(
-                                number: t['sold_e_2'].toString(),
+                                number: t['checked_2'].toString(),
                                 ticketSold: "Ticket Sold",
                                 venueName: 'Moirang',
                               ),
@@ -119,7 +119,7 @@ class _VisitorPageState extends State<VisitorPage> {
                             Expanded(
                               flex: 1,
                               child: TicketContainerSoldWidget(
-                                number: t['sold_e_3'].toString(),
+                                number: t['checked_3'].toString(),
                                 ticketSold: "Ticket Sold",
                                 venueName: 'Marjing',
                               ),

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sangai_officer_app/Onbaording/pages/otp_login.page.dart';
 
@@ -71,15 +74,18 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                     const SizedBox(
                       height: 200,
                     ),
-                    const Text(
+                    Text(
                       'AGENT',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: GoogleFonts.raleway(
+                          fontSize: 15, fontWeight: FontWeight.w800),
                     ),
-                    const Text(
+                    Text(
                       'Login',
+                      style: GoogleFonts.raleway(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w900,
+                        color: const Color(0xfff45b69),
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -88,13 +94,16 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               'We will send you OTP on this ',
+                              style: GoogleFonts.raleway(
+                                  fontSize: 18, fontWeight: FontWeight.w700),
                             ),
                             Text(
                               'mobile number',
-                              // style: getSemiBoldStyle(color: Colors.black),
+                              style: GoogleFonts.raleway(
+                                  fontSize: 18, fontWeight: FontWeight.w700),
                             )
                           ],
                         )
@@ -163,6 +172,7 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                                   ],
                                   onChanged: (value) {
                                     phone = value;
+                                    log("On Change$value");
                                   },
                                 ),
                               ),
