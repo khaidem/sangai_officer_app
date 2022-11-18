@@ -65,15 +65,23 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
           color: Color.fromARGB(255, 123, 172, 214),
           fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
+        // gradient: const LinearGradient(
+        //   colors: [
+        //     Color(0xfff45b69),
+        //     Color(0xffffbc11),
+        //   ],
+        // ),
         border: Border.all(
-          color: Colors.black,
+          color: Colors.grey,
         ),
         borderRadius: BorderRadius.circular(20),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Colors.blue),
+      border: Border.all(
+        color: const Color(0xfff45b69),
+      ),
       borderRadius: BorderRadius.circular(8),
     );
 
@@ -100,7 +108,7 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 200,
+                    height: 150,
                   ),
                   Text(
                     'AGENT',
@@ -117,7 +125,7 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 50,
                   ),
                   Row(
                     children: [
@@ -133,7 +141,7 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                             maxLines: 1,
                             text: TextSpan(
                               text: 'Enter',
-                              style: GoogleFonts.raleway(
+                              style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black),
@@ -206,7 +214,7 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                             (route) => false);
                         EasyLoading.dismiss();
                       } catch (error) {
-                        EasyLoading.showError(error.toString());
+                        EasyLoading.showError('Invalid OTP');
                       }
 
                       // setState(() {

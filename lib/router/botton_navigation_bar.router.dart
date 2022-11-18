@@ -21,7 +21,7 @@ class _BottomNavigationBarRouterState extends State<BottomNavigationBarRouter> {
   final List pages = [
     const HomePage(),
     const TicketPage(),
-    const VisitorPage()
+    const VisitorPage(),
   ];
   //*** This For  BottomNavigationPage to Set Global Declare so that all the page get
 //**   BottomNavigation */  */
@@ -58,6 +58,10 @@ class _BottomNavigationBarRouterState extends State<BottomNavigationBarRouter> {
             label: 'Visitor Count',
             icon: Icon(FontAwesomeIcons.users),
           ),
+          // BottomNavigationBarItem(
+          //   label: 'logOut',
+          //   icon: Icon(Icons.logout),
+          // ),
         ],
       ),
       body: Stack(children: [buildNavigator()]),

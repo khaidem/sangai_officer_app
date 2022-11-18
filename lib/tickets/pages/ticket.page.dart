@@ -108,6 +108,21 @@ class _TicketPageState extends State<TicketPage> {
                               number: t['sold_e_3'].toString(),
                               image: KImage.ticketsLowOpac),
                           const SizedBox(height: 10),
+                          TicketContainerWidget(
+                              venueName: "Hapta kangjeibung",
+                              number: t['sold_p_1'].toString(),
+                              image: KImage.ticketsLowOpac),
+                          getSize(10, 0),
+                          TicketContainerWidget(
+                              venueName: "Moirng",
+                              number: t['sold_p_2'].toString(),
+                              image: KImage.ticketsLowOpac),
+                          getSize(10, 0),
+                          TicketContainerWidget(
+                              venueName: "Marjing",
+                              number: t['sold_p_3'].toString(),
+                              image: KImage.ticketsLowOpac),
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ],

@@ -58,10 +58,10 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
             children: [
               Positioned(
                 left: 25,
-                top: 20,
+                top: 15,
                 child: Image.asset(
                   KImage.sangailogo,
-                  height: 200,
+                  height: 180,
                 ),
               ),
               Padding(
@@ -71,7 +71,7 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                   // mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     const SizedBox(
-                      height: 200,
+                      height: 150,
                     ),
                     Text(
                       'AGENT',
@@ -87,18 +87,45 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 50,
                     ),
                     Row(
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'We will send you OTP on this ',
-                              style: GoogleFonts.raleway(
-                                  fontSize: 18, fontWeight: FontWeight.w700),
+                            RichText(
+                              overflow: TextOverflow.clip,
+                              textAlign: TextAlign.end,
+                              textDirection: TextDirection.rtl,
+                              textScaleFactor: 1,
+                              softWrap: true,
+                              maxLines: 1,
+                              text: TextSpan(
+                                text: 'We will send you',
+                                style: GoogleFonts.raleway(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                                children: const [
+                                  TextSpan(
+                                      text: ' OTP',
+                                      style: TextStyle(
+                                        color: Color(0xfff45b69),
+                                      )),
+                                  TextSpan(text: ' '),
+                                  TextSpan(text: 'on this'),
+
+                                  // TextSpan(text: widget.phoneNUmber),
+                                ],
+                              ),
                             ),
+
+                            // Text(
+                            //   'We will send you OTP on this ',
+                            //   style: GoogleFonts.raleway(
+                            //       fontSize: 18, fontWeight: FontWeight.w700),
+                            // ),
                             Text(
                               'mobile number',
                               style: GoogleFonts.raleway(
