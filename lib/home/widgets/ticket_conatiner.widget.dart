@@ -25,7 +25,7 @@ class TicketContainerWidget extends StatelessWidget {
           Radius.circular(10),
         ),
       ),
-      width: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(1.5),
         child: Container(

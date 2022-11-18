@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/date_formate.dart';
 import '../../core/text_style.dart';
 import '../../core/widget/icon_gradient.widget.dart';
 
@@ -40,7 +41,7 @@ class RowSoldWidget extends StatelessWidget {
         ),
         const Spacer(),
         Text(
-          date,
+          dateTimeFormate(DateTime.parse(date)),
           style: GoogleFonts.raleway(
             color: Colors.black,
             fontSize: 20,

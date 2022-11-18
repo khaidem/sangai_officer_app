@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
-import 'package:sangai_officer_app/Onbaording/pages/login.page.dart';
+import 'package:sangai_officer_app/Onbaording/pages/opt_login.page.dart';
 import 'package:sangai_officer_app/router/router.dart';
 
 import '../../core/constant.dart';
@@ -25,6 +27,7 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
   AnimationController? _controller;
   final focusNode = FocusNode();
   TextEditingController otpSend = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   final FirebaseAuth auth = FirebaseAuth.instance;
   var code = '';
   @override
@@ -165,35 +168,101 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                   const SizedBox(
                     height: 20,
                   ),
-                  Pinput(
-                    // androidSmsAutofillMethod:
-                    //     AndroidSmsAutofillMethod.smsRetrieverApi,
-                    length: 6,
-                    showCursor: true,
-                    defaultPinTheme: defaultPinTheme,
-                    focusedPinTheme: focusedPinTheme,
-                    submittedPinTheme: submittedPinTheme,
-                    onCompleted: (value) {
-                      code = value;
-                    },
-                    // onCompleted: (verify) {
-                    //   setState(() {
-                    //     code = verify;
-
-                    //     // context.read<AuthService>().otpVerification(code).then(
-                    //     //   (value) {
-                    //     //     if (value) {
-                    //     //       return Navigator.of(context)
-                    //     //           .pushNamedAndRemoveUntil(
-                    //     //         BottomNavigationBarRouter.routeName,
-                    //     //         (route) => false,
-                    //     //       );
-                    //     //     }
-                    //     //   },
-                    //     // );
-                    //   });
-                    // },
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color(0xfff45b69),
+                          Color(0xffffbc11),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(1.5),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            // SizedBox(
+                            //   width: 30,
+                            //   child: TextFormField(
+                            //     controller: phoneController,
+                            //     keyboardType: TextInputType.number,
+                            //     decoration: const InputDecoration(
+                            //       border: InputBorder.none,
+                            //     ),
+                            //   ),
+                            // ),
+                            // const Text(
+                            //   "|",
+                            //   style: TextStyle(
+                            //     fontSize: 33,
+                            //     color: Colors.grey,
+                            //   ),
+                            // ),
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            SizedBox(
+                              width: 250,
+                              child: TextFormField(
+                                controller: phoneController,
+                                keyboardType: TextInputType.phone,
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'OTP',
+                                  labelStyle: TextStyle(color: Colors.black38),
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  filled: true,
+                                  fillColor: Colors.white70,
+                                ),
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(10),
+                                ],
+                                onChanged: (value) {
+                                  code = value;
+                                  log("On Change$value");
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
+                  // Pinput(
+                  //   // androidSmsAutofillMethod:
+                  //   //     AndroidSmsAutofillMethod.smsRetrieverApi,
+                  //   length: 6,
+                  //   showCursor: true,
+                  //   defaultPinTheme: defaultPinTheme,
+                  //   focusedPinTheme: focusedPinTheme,
+                  //   submittedPinTheme: submittedPinTheme,
+                  //   onCompleted: (value) {
+                  //     code = value;
+                  //   },
+                  // onCompleted: (verify) {
+                  //   setState(() {
+                  //     code = verify;
+
+                  //     // context.read<AuthService>().otpVerification(code).then(
+                  //     //   (value) {
+                  //     //     if (value) {
+                  //     //       return Navigator.of(context)
+                  //     //           .pushNamedAndRemoveUntil(
+                  //     //         BottomNavigationBarRouter.routeName,
+                  //     //         (route) => false,
+                  //     //       );
+                  //     //     }
+                  //     //   },
+                  //     // );
+                  //   });
+                  // },
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),

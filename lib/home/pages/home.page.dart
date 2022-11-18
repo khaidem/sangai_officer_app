@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:sangai_officer_app/Onbaording/logic/auth_service.provider.dart';
 import 'package:sangai_officer_app/core/widget/text_gradient.widget.dart';
 import 'package:sangai_officer_app/home/example.dart';
 
@@ -78,7 +76,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -101,56 +99,56 @@ class _HomePageState extends State<HomePage> {
                     const Spacer(),
                     Image.asset(
                       KImage.sangailogo,
-                      height: 70,
+                      height: 100,
                     ),
-                    IconButton(
-                        onPressed: () {
-                          showDialog<void>(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Do You want to logout?'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      textStyle: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge,
-                                    ),
-                                    child: const Text(
-                                      'Yes',
-                                      style: TextStyle(
-                                          color: Color(0xfff45b69),
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    onPressed: () {
-                                      context
-                                          .read<AuthServiceProvider>()
-                                          .signOut(context);
-                                    },
-                                  ),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      textStyle: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge,
-                                    ),
-                                    child: const Text(
-                                      'No',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        icon: const Icon(Icons.logout))
+                    // IconButton(
+                    //     onPressed: () {
+                    //       showDialog<void>(
+                    //         context: context,
+                    //         builder: (BuildContext context) {
+                    //           return AlertDialog(
+                    //             title: const Text('Do You want to logout?'),
+                    //             actions: <Widget>[
+                    //               TextButton(
+                    //                 style: TextButton.styleFrom(
+                    //                   textStyle: Theme.of(context)
+                    //                       .textTheme
+                    //                       .labelLarge,
+                    //                 ),
+                    //                 child: const Text(
+                    //                   'Yes',
+                    //                   style: TextStyle(
+                    //                       color: Color(0xfff45b69),
+                    //                       fontWeight: FontWeight.bold),
+                    //                 ),
+                    //                 onPressed: () {
+                    //                   context
+                    //                       .read<AuthServiceProvider>()
+                    //                       .signOut(context);
+                    //                 },
+                    //               ),
+                    //               TextButton(
+                    //                 style: TextButton.styleFrom(
+                    //                   textStyle: Theme.of(context)
+                    //                       .textTheme
+                    //                       .labelLarge,
+                    //                 ),
+                    //                 child: const Text(
+                    //                   'No',
+                    //                   style: TextStyle(
+                    //                       color: Colors.black,
+                    //                       fontWeight: FontWeight.bold),
+                    //                 ),
+                    //                 onPressed: () {
+                    //                   Navigator.of(context).pop();
+                    //                 },
+                    //               ),
+                    //             ],
+                    //           );
+                    //         },
+                    //       );
+                    //     },
+                    //     icon: const Icon(Icons.logout))
                   ],
                 ),
                 getSize(10, 0),
@@ -212,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     getSize(0, 10),
                     Text(
-                      'Offline -Tickets Sold',
+                      'Paper Tickets Sold',
                       style: GoogleFonts.raleway(
                         color: Colors.black,
                         fontSize: 20,

@@ -1,11 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:sangai_officer_app/home/example.dart';
+import 'package:sangai_officer_app/tickets/example.dart';
+import 'package:sangai_officer_app/tickets/widgets/ticket_container.widget.dart';
 
 import '../../core/constant.dart';
 import '../../core/text_style.dart';
 import '../../core/widget/text_gradient.widget.dart';
-import '../widgets/row_sold.widget.dart';
 
 class TicketPage extends StatefulWidget {
   const TicketPage({Key? key}) : super(key: key);
@@ -93,36 +93,21 @@ class _TicketPageState extends State<TicketPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TicketContainerWidget(
-                              venueName: "Hapta kangjeibung",
-                              number: t['sold_e_1'].toString(),
-                              image: KImage.ticketsLowOpac),
+                          ContainerSoldWidget(
+                              venueName: 'Hapta kangjeibung',
+                              Enumber: t['sold_e_1'].toString(),
+                              Pnumber: t['sold_p_1'].toString()),
                           getSize(10, 0),
-                          TicketContainerWidget(
-                              venueName: "Moirng",
-                              number: t['sold_e_2'].toString(),
-                              image: KImage.ticketsLowOpac),
+                          ContainerSoldWidget(
+                              venueName: 'Moirng khunou',
+                              Enumber: t['sold_e_2'].toString(),
+                              Pnumber: t['sold_p_2'].toString()),
                           getSize(10, 0),
-                          TicketContainerWidget(
-                              venueName: "Marjing",
-                              number: t['sold_e_3'].toString(),
-                              image: KImage.ticketsLowOpac),
-                          const SizedBox(height: 10),
-                          TicketContainerWidget(
-                              venueName: "Hapta kangjeibung",
-                              number: t['sold_p_1'].toString(),
-                              image: KImage.ticketsLowOpac),
-                          getSize(10, 0),
-                          TicketContainerWidget(
-                              venueName: "Moirng",
-                              number: t['sold_p_2'].toString(),
-                              image: KImage.ticketsLowOpac),
-                          getSize(10, 0),
-                          TicketContainerWidget(
-                              venueName: "Marjing",
-                              number: t['sold_p_3'].toString(),
-                              image: KImage.ticketsLowOpac),
-                          const SizedBox(height: 10),
+                          ContainerSoldWidget(
+                            venueName: 'Marjing',
+                            Enumber: t['sold_e_3'].toString(),
+                            Pnumber: t['sold_p_3'].toString(),
+                          ),
                         ],
                       ),
                     ],

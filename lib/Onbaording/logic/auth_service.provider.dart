@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:sangai_officer_app/Onbaording/pages/otp_login.page.dart';
+import 'package:sangai_officer_app/Onbaording/pages/verification_otp.page.dart';
 import 'package:sangai_officer_app/router/router.dart';
 
-import '../pages/login.page.dart';
+import '../pages/opt_login.page.dart';
 
 class AuthServiceProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
