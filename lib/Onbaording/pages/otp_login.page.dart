@@ -1,13 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
-import 'package:provider/provider.dart';
-import 'package:sangai_officer_app/Onbaording/logic/auth_service.provider.dart';
+import 'package:sangai_officer_app/Onbaording/pages/login.page.dart';
+import 'package:sangai_officer_app/router/router.dart';
 
 import '../../core/constant.dart';
-import '../../router/botton_navigation_bar.router.dart';
 
 class VerificationOtpPage extends StatefulWidget {
   const VerificationOtpPage({Key? key, required this.phoneNUmber})
@@ -25,6 +25,7 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
   AnimationController? _controller;
   final focusNode = FocusNode();
   TextEditingController otpSend = TextEditingController();
+  final FirebaseAuth auth = FirebaseAuth.instance;
   var code = '';
   @override
   void initState() {
@@ -164,6 +165,9 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                     defaultPinTheme: defaultPinTheme,
                     focusedPinTheme: focusedPinTheme,
                     submittedPinTheme: submittedPinTheme,
+                    onCompleted: (value) {
+                      code = value;
+                    },
                     // onCompleted: (verify) {
                     //   setState(() {
                     //     code = verify;
@@ -186,25 +190,42 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                     height: 20,
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       EasyLoading.show(status: 'Verifying...');
-                      setState(() {
-                        context
-                            .read<AuthServiceProvider>()
-                            .otpVerification(code, context)
-                            .then(
-                          (value) {
-                            if (value) {
-                              EasyLoading.dismiss();
-                              return Navigator.of(context)
-                                  .pushNamedAndRemoveUntil(
-                                BottomNavigationBarRouter.routeName,
-                                (route) => false,
-                              );
-                            }
-                          },
-                        );
-                      });
+                      try {
+                        PhoneAuthCredential credential =
+                            PhoneAuthProvider.credential(
+                                verificationId: OtpLoginPage.verify,
+                                smsCode: code);
+
+                        await auth.signInWithCredential(credential);
+
+                        Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            BottomNavigationBarRouter.routeName,
+                            (route) => false);
+                        EasyLoading.dismiss();
+                      } catch (error) {
+                        EasyLoading.showError(error.toString());
+                      }
+
+                      // setState(() {
+                      //   // context
+                      //   //     .read<AuthServiceProvider>()
+                      //   //     .otpVerification(code, context)
+                      //   //     .then(
+                      //   //   (value) {
+                      //   //     if (value) {
+                      //   //       EasyLoading.dismiss();
+                      //   //       return Navigator.of(context)
+                      //   //           .pushNamedAndRemoveUntil(
+                      //   //         BottomNavigationBarRouter.routeName,
+                      //   //         (route) => false,
+                      //   //       );
+                      //   //     }
+                      //   //   },
+                      //   // );
+                      // });
                     },
                     child: Container(
                       width: 500,

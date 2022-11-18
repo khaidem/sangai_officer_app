@@ -1,14 +1,13 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:sangai_officer_app/Onbaording/pages/otp_login.page.dart';
 
 import '../../core/constant.dart';
-import '../logic/auth_service.provider.dart';
 import '../logic/otp_login.provider.dart';
 
 class OtpLoginPage extends StatefulWidget {
@@ -21,7 +20,7 @@ class OtpLoginPage extends StatefulWidget {
 }
 
 class _OtpLoginPageState extends State<OtpLoginPage> {
-  TextEditingController countryController = TextEditingController();
+  TextEditingController countryCode = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
   var phone = '';
@@ -30,7 +29,7 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
   @override
   void initState() {
     _updateAppbar();
-    countryController.text = '+91';
+    countryCode.text = '+91';
     super.initState();
   }
 
@@ -44,7 +43,7 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
 
   @override
   void dispose() {
-    countryController.dispose();
+    countryCode.dispose();
     phoneController.dispose();
     super.dispose();
   }
@@ -136,7 +135,7 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                               SizedBox(
                                 width: 30,
                                 child: TextFormField(
-                                  controller: countryController,
+                                  controller: countryCode,
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
@@ -186,7 +185,9 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                     ),
                     InkWell(
                       onTap: () async {
-                        EasyLoading.show(status: 'Please wait');
+                        EasyLoading.show(
+                          status: 'Please wait',
+                        );
                         if (mounted) {
                           setState(() {
                             _isLoading = true;
@@ -198,22 +199,40 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                           var d =
                               await LoginAPI().checkPhone(phoneController.text);
                           if (d) {
-                            EasyLoading.dismiss();
+                            await FirebaseAuth.instance.verifyPhoneNumber(
+                              phoneNumber: countryCode.text + phone,
+                              verificationCompleted:
+                                  (PhoneAuthCredential credential) {},
+                              verificationFailed: (FirebaseAuthException e) {},
+                              codeSent:
+                                  (String verificationId, int? resendToken) {
+                                OtpLoginPage.verify = verificationId;
+                                EasyLoading.showToast('Success');
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => VerificationOtpPage(
+                                        phoneNUmber: phoneController.text),
+                                  ),
+                                );
+                              },
+                              codeAutoRetrievalTimeout:
+                                  (String verificationId) {},
+                            );
 
-                            context
-                                .read<AuthServiceProvider>()
-                                .getVerificationPhone(
-                                    context,
-                                    countryController.text +
-                                        phoneController.text)
-                                .whenComplete(() => Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (ctx) => VerificationOtpPage(
-                                            phoneNUmber:
-                                                "+91${phoneController.text}"),
-                                      ),
-                                    ));
-                            EasyLoading.showToast('Success');
+                            // context
+                            //     .read<AuthServiceProvider>()
+                            //     .getVerificationPhone(
+                            //         context,
+                            //         countryController.text +
+                            //             phoneController.text)
+                            //     .whenComplete(() => Navigator.of(context).push(
+                            //           MaterialPageRoute(
+                            //             builder: (ctx) => VerificationOtpPage(
+                            //                 phoneNUmber:
+                            //                     "+91${phoneController.text}"),
+                            //           ),
+                            //         ));
+
                           } else {
                             EasyLoading.showToast('Mobile Number not Register');
                           }
