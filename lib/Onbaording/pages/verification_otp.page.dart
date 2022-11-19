@@ -221,7 +221,7 @@ class _VerificationOtpPageState extends State<VerificationOtpPage>
                                   fillColor: Colors.white70,
                                 ),
                                 inputFormatters: [
-                                  LengthLimitingTextInputFormatter(10),
+                                  LengthLimitingTextInputFormatter(6),
                                 ],
                                 onChanged: (value) {
                                   code = value;

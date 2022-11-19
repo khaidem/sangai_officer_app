@@ -47,76 +47,74 @@ class _VisitorPageState extends State<VisitorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Vistors",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(43),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Vistors",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+                ),
+                const GradientText(
+                  'Count',
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xfff45b69),
+                      Color(0xffffbc11),
+                    ],
                   ),
-                  const GradientText(
-                    'Count',
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xfff45b69),
-                        Color(0xffffbc11),
+                  fontSize: 30,
+                ),
+                const Spacer(),
+                Image.asset(
+                  KImage.sangailogo,
+                  height: 100,
+                ),
+              ],
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: keys.length,
+              itemBuilder: (context, index) {
+                var t = data[keys[index]];
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: RowSoldWidget(
+                          dayName: "Day ${index + 1}", date: keys[index]),
+                    ),
+                    // Text(data[keys[index]].toString())
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TicketContainerWidget(
+                            venueName: "Hapta kangjeibung",
+                            number: t['checked_1'].toString(),
+                            image: KImage.visitorLowOpac),
+                        getSize(10, 0),
+                        TicketContainerWidget(
+                            venueName: "Moirng",
+                            number: t['checked_2'].toString(),
+                            image: KImage.visitorLowOpac),
+                        getSize(10, 0),
+                        TicketContainerWidget(
+                            venueName: "Marjing",
+                            number: t['checked_3'].toString(),
+                            image: KImage.visitorLowOpac),
+                        const SizedBox(height: 10),
                       ],
                     ),
-                    fontSize: 30,
-                  ),
-                  const Spacer(),
-                  Image.asset(
-                    KImage.sangailogo,
-                    height: 100,
-                  ),
-                ],
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: keys.length,
-                itemBuilder: (context, index) {
-                  var t = data[keys[index]];
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: RowSoldWidget(
-                            dayName: "Day ${index + 1}", date: keys[index]),
-                      ),
-                      // Text(data[keys[index]].toString())
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TicketContainerWidget(
-                              venueName: "Hapta kangjeibung",
-                              number: t['checked_1'].toString(),
-                              image: KImage.visitorLowOpac),
-                          getSize(10, 0),
-                          TicketContainerWidget(
-                              venueName: "Moirng",
-                              number: t['checked_2'].toString(),
-                              image: KImage.visitorLowOpac),
-                          getSize(10, 0),
-                          TicketContainerWidget(
-                              venueName: "Marjing",
-                              number: t['checked_3'].toString(),
-                              image: KImage.visitorLowOpac),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ],
-          ),
+                  ],
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

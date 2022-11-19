@@ -63,6 +63,14 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                 height: 180,
               ),
             ),
+            // Positioned(
+            //   left: 140,
+            //   bottom: 10,
+            //   child: Image.asset(
+            //     KImage.poweredBy,
+            //     height: 40,
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(35),
               child: Column(
@@ -302,19 +310,19 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 250,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 20,
-                        child: Image.asset(KImage.poweredBy),
-                      )
-                    ],
-                  )
+                  // const SizedBox(
+                  //   height: 250,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  //     SizedBox(
+                  //       height: 20,
+                  //       child: Image.asset(KImage.poweredBy),
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
             ),

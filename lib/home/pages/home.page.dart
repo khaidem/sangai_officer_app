@@ -19,45 +19,51 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final d = DateTime.now().toString();
+  List listData = [];
 
-  String ticket1 = '';
-  String ticket2 = '';
-  String ticket3 = '';
-  String visitor1 = '';
-  String visitor2 = '';
-  String visitor3 = '';
-  String offlineticket1 = '';
-  String offlineticket2 = '';
-  String offlineticket3 = '';
+  String? ticket1;
+  String? ticket2;
+  String? ticket3;
+  String? visitor1;
+  String? visitor2;
+  String? visitor3;
+  String? paperTicket1;
+  String? paperTicket2;
+  String? paperTicket3;
 
   @override
   void initState() {
     super.initState();
+
     var timeSplit = d.split(' ');
     final ref =
         FirebaseDatabase.instance.ref().child('tickets').child(timeSplit[0]);
 
     ref.onValue.listen((dataValue) {
-      final data = Map<String, dynamic>.from(
+      var data = Map<String, dynamic>.from(
         dataValue.snapshot.value as Map,
       );
-      log(data.toString());
+
+      log('Show Data Form Firebase $data');
       if (!mounted) {
         return;
       }
+      if (data == null) {
+        return log('Empty Data');
+      }
+
       setState(() {
         ticket1 = data['sold_e_1'].toString();
         ticket2 = data['sold_e_2'].toString();
         ticket3 = data['sold_e_3'].toString();
-        offlineticket1 = data['sold_p_1'].toString();
-        offlineticket2 = data['sold_p_2'].toString();
-        offlineticket3 = data['sold_p_3'].toString();
+        paperTicket1 = data['sold_p_1'].toString();
+        paperTicket2 = data['sold_p_2'].toString();
+        paperTicket3 = data['sold_p_3'].toString();
 
         visitor1 = data['checked_1'].toString();
         visitor2 = data['checked_2'].toString();
         visitor3 = data['checked_3'].toString();
       });
-      log(ticket1.toString());
     });
   }
 
@@ -72,11 +78,55 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (ticket1 == null) {
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(43),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Today's",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+                    ),
+                    const GradientText(
+                      'Report',
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xfff45b69),
+                          Color(0xffffbc11),
+                        ],
+                      ),
+                      fontSize: 30,
+                    ),
+                    const Spacer(),
+                    Image.asset(
+                      KImage.sangailogo,
+                      height: 100,
+                    ),
+                  ],
+                ),
+                getSize(250, 0),
+                const Text(
+                  'No Report',
+                  style: TextStyle(),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+    }
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(43),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -101,54 +151,6 @@ class _HomePageState extends State<HomePage> {
                       KImage.sangailogo,
                       height: 100,
                     ),
-                    // IconButton(
-                    //     onPressed: () {
-                    //       showDialog<void>(
-                    //         context: context,
-                    //         builder: (BuildContext context) {
-                    //           return AlertDialog(
-                    //             title: const Text('Do You want to logout?'),
-                    //             actions: <Widget>[
-                    //               TextButton(
-                    //                 style: TextButton.styleFrom(
-                    //                   textStyle: Theme.of(context)
-                    //                       .textTheme
-                    //                       .labelLarge,
-                    //                 ),
-                    //                 child: const Text(
-                    //                   'Yes',
-                    //                   style: TextStyle(
-                    //                       color: Color(0xfff45b69),
-                    //                       fontWeight: FontWeight.bold),
-                    //                 ),
-                    //                 onPressed: () {
-                    //                   context
-                    //                       .read<AuthServiceProvider>()
-                    //                       .signOut(context);
-                    //                 },
-                    //               ),
-                    //               TextButton(
-                    //                 style: TextButton.styleFrom(
-                    //                   textStyle: Theme.of(context)
-                    //                       .textTheme
-                    //                       .labelLarge,
-                    //                 ),
-                    //                 child: const Text(
-                    //                   'No',
-                    //                   style: TextStyle(
-                    //                       color: Colors.black,
-                    //                       fontWeight: FontWeight.bold),
-                    //                 ),
-                    //                 onPressed: () {
-                    //                   Navigator.of(context).pop();
-                    //                 },
-                    //               ),
-                    //             ],
-                    //           );
-                    //         },
-                    //       );
-                    //     },
-                    //     icon: const Icon(Icons.logout))
                   ],
                 ),
                 getSize(10, 0),
@@ -177,21 +179,20 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-
                 getSize(10, 0),
                 TicketContainerWidget(
                     venueName: 'Hapta Kangjeibung',
-                    number: ticket1,
+                    number: ticket1 ?? '',
                     image: KImage.ticketsLowOpac),
                 getSize(10, 0),
                 TicketContainerWidget(
                     venueName: 'Moirang Khunou',
-                    number: ticket2,
+                    number: ticket2 ?? '',
                     image: KImage.ticketsLowOpac),
                 getSize(10, 0),
                 TicketContainerWidget(
                     venueName: 'Marjing',
-                    number: ticket2,
+                    number: ticket2 ?? '',
                     image: KImage.ticketsLowOpac),
                 getSize(10, 0),
                 Row(
@@ -222,20 +223,19 @@ class _HomePageState extends State<HomePage> {
                 getSize(10, 0),
                 TicketContainerWidget(
                     venueName: 'Hapta Kangjeibung',
-                    number: offlineticket1,
+                    number: paperTicket1 ?? '',
                     image: KImage.ticketsLowOpac),
                 getSize(10, 0),
                 TicketContainerWidget(
                     venueName: 'Moirang Khunou',
-                    number: offlineticket2,
+                    number: paperTicket2 ?? '',
                     image: KImage.ticketsLowOpac),
                 getSize(10, 0),
                 TicketContainerWidget(
                     venueName: 'Marjing',
-                    number: offlineticket3,
+                    number: paperTicket3 ?? '',
                     image: KImage.ticketsLowOpac),
                 getSize(10, 0),
-
                 Row(
                   children: [
                     const GradientIcon(
@@ -264,119 +264,19 @@ class _HomePageState extends State<HomePage> {
                 getSize(10, 0),
                 TicketContainerWidget(
                     venueName: 'Hapta Kangjeibung',
-                    number: visitor1,
+                    number: visitor1 ?? '',
                     image: KImage.visitorLowOpac),
                 getSize(10, 0),
                 TicketContainerWidget(
                     venueName: 'Moirang Khunou',
-                    number: visitor2,
+                    number: visitor2 ?? '',
                     image: KImage.visitorLowOpac),
                 getSize(10, 0),
                 TicketContainerWidget(
-                    venueName: 'Marjing',
-                    number: visitor3,
-                    image: KImage.visitorLowOpac),
-
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Expanded(
-                //       flex: 1,
-                //       child: TicketContainerSoldWidget(
-                //         venueName: 'Hapta Kangjeibung',
-                //         number: ticket1,
-                //         ticketSold: 'TicketSold',
-                //       ),
-                //     ),
-                //     getSize(0, 10),
-                //     Expanded(
-                //       flex: 1,
-                //       child: TicketContainerSoldWidget(
-                //         venueName: 'Moirang Khunou',
-                //         number: ticket2,
-                //         ticketSold: 'TicketSold',
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // getSize(10, 0),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     Expanded(
-                //       flex: 1,
-                //       child: TicketContainerSoldWidget(
-                //         venueName: 'Marjing',
-                //         number: ticket3,
-                //         ticketSold: 'TicketSold',
-                //       ),
-                //     ),
-                //     getSize(0, 10),
-                //     Expanded(flex: 1, child: Container())
-                //   ],
-                // ),
-                // getSize(20, 0),
-                // Row(
-                //   children: [
-                //     const GradientIcon(
-                //       Icons.person,
-                //       25,
-                //       LinearGradient(
-                //         colors: <Color>[
-                //           Color(0xfff45b69),
-                //           Color(0xffffbc11),
-                //         ],
-                //         begin: Alignment.topLeft,
-                //         end: Alignment.bottomRight,
-                //       ),
-                //     ),
-                //     getSize(0, 10),
-                //     Text(
-                //       'Visitors',
-                //       style: GoogleFonts.raleway(
-                //         color: Colors.black,
-                //         fontSize: 20,
-                //         fontWeight: FontWeight.w800,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // getSize(10, 0),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Expanded(
-                //       child: TicketContainerSoldWidget(
-                //         venueName: 'Hapta Kangjeibung',
-                //         number: visitor1,
-                //         ticketSold: 'TicketSold',
-                //       ),
-                //     ),
-                //     getSize(0, 10),
-                //     Expanded(
-                //       child: TicketContainerSoldWidget(
-                //         venueName: 'Moirang Khunou',
-                //         number: visitor2,
-                //         ticketSold: 'TicketSold',
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // getSize(10, 0),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     Expanded(
-                //       flex: 1,
-                //       child: TicketContainerSoldWidget(
-                //         venueName: 'Marjing',
-                //         number: visitor3,
-                //         ticketSold: 'TicketSold',
-                //       ),
-                //     ),
-                //     Expanded(flex: 1, child: Container())
-                //   ],
-                // ),
+                  venueName: 'Marjing',
+                  number: visitor3 ?? '',
+                  image: KImage.visitorLowOpac,
+                ),
               ],
             ),
           ),
