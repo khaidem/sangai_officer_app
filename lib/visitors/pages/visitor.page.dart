@@ -99,7 +99,7 @@ class _VisitorPageState extends State<VisitorPage> {
                             image: KImage.visitorLowOpac),
                         getSize(10, 0),
                         TicketContainerWidget(
-                            venueName: "Moirng",
+                            venueName: "Moirang",
                             number: t['checked_2'].toString(),
                             image: KImage.visitorLowOpac),
                         getSize(10, 0),

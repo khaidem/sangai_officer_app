@@ -98,7 +98,7 @@ class _TicketPageState extends State<TicketPage> {
                             Pnumber: t['sold_p_1'].toString()),
                         getSize(10, 0),
                         ContainerSoldWidget(
-                            venueName: 'Moirng khunou',
+                            venueName: 'Moirang khunou',
                             Enumber: t['sold_e_2'].toString(),
                             Pnumber: t['sold_p_2'].toString()),
                         getSize(10, 0),

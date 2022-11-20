@@ -237,12 +237,12 @@ class _OtpLoginPageState extends State<OtpLoginPage> {
                               verificationCompleted:
                                   (PhoneAuthCredential credential) {},
                               verificationFailed: (FirebaseAuthException e) {
-                                EasyLoading.showError(e.toString());
+                                EasyLoading.showError(e.message.toString());
                               },
                               codeSent:
                                   (String verificationId, int? resendToken) {
                                 OtpLoginPage.verify = verificationId;
-                                EasyLoading.showToast('Success');
+                                EasyLoading.showToast('OTP Send');
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (ctx) => VerificationOtpPage(

@@ -36,35 +36,39 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     var timeSplit = d.split(' ');
-    final ref =
-        FirebaseDatabase.instance.ref().child('tickets').child(timeSplit[0]);
+    try {
+      final ref =
+          FirebaseDatabase.instance.ref().child('tickets').child(timeSplit[0]);
 
-    ref.onValue.listen((dataValue) {
-      var data = Map<String, dynamic>.from(
-        dataValue.snapshot.value as Map,
-      );
+      ref.onValue.listen((dataValue) {
+        var data = Map<String, dynamic>.from(
+          dataValue.snapshot.value as Map,
+        );
 
-      log('Show Data Form Firebase $data');
-      if (!mounted) {
-        return;
-      }
-      if (data == null) {
-        return log('Empty Data');
-      }
+        log('Show Data Form Firebase $data');
+        if (!mounted) {
+          return;
+        }
+        if (listData.isEmpty) {
+          return log('Empty Data');
+        }
 
-      setState(() {
-        ticket1 = data['sold_e_1'].toString();
-        ticket2 = data['sold_e_2'].toString();
-        ticket3 = data['sold_e_3'].toString();
-        paperTicket1 = data['sold_p_1'].toString();
-        paperTicket2 = data['sold_p_2'].toString();
-        paperTicket3 = data['sold_p_3'].toString();
+        setState(() {
+          ticket1 = data['sold_e_1'].toString();
+          ticket2 = data['sold_e_2'].toString();
+          ticket3 = data['sold_e_3'].toString();
+          paperTicket1 = data['sold_p_1'].toString();
+          paperTicket2 = data['sold_p_2'].toString();
+          paperTicket3 = data['sold_p_3'].toString();
 
-        visitor1 = data['checked_1'].toString();
-        visitor2 = data['checked_2'].toString();
-        visitor3 = data['checked_3'].toString();
+          visitor1 = data['checked_1'].toString();
+          visitor2 = data['checked_2'].toString();
+          visitor3 = data['checked_3'].toString();
+        });
       });
-    });
+    } catch (error) {
+      rethrow;
+    }
   }
 
   final Shader linearGradient = const LinearGradient(
